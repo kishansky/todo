@@ -1,14 +1,24 @@
 # 🗂️ Ziraboard — Team-Based Project Management System
 
-Ziraboard is a complete Kanban-style project management system like **Trello, Jira, Linear**, featuring:
+[![Live Demo](https://img.shields.io/badge/Live_Demo-todo.onexcode.com-4ade80?style=for-the-badge&logo=vercel)](https://todo.onexcode.com)
+![Laravel](https://img.shields.io/badge/Laravel-10-f9322c?style=for-the-badge&logo=laravel)
+![React](https://img.shields.io/badge/React-18-61dafb?style=for-the-badge&logo=react)
+![MySQL](https://img.shields.io/badge/MySQL-Database-00758f?style=for-the-badge&logo=mysql)
+![Shadcn/UI](https://img.shields.io/badge/shadcn-ui-000?style=for-the-badge)
+![DndKit](https://img.shields.io/badge/DndKit-Drag%20%26%20Drop-6b46c1?style=for-the-badge)
+![Sanctum](https://img.shields.io/badge/Laravel-Sanctum-9333ea?style=for-the-badge)
 
-- ✔ Teams & member roles  
-- ✔ Invite system (accept/reject)  
-- ✔ Projects (personal + team-based)  
-- ✔ Kanban board with columns & tasks  
-- ✔ Drag & drop (smooth DndKit)  
+Ziraboard is a complete **team-based project management system** inspired by  
+**Trello, Jira, Notion, and Linear**, featuring:
+
+- ✔ Teams & Member Roles  
+- ✔ Pending Invites (Accept / Reject)  
+- ✔ Team & Personal Projects  
+- ✔ Kanban Board with Columns  
+- ✔ Tasks with Assignee, Due Date, Priority  
+- ✔ Beautiful Drag & Drop  
 - ✔ Permissions (Owner / Admin / Member)  
-- ✔ Task priority, due date, assignee, etc.
+- ✔ Smooth UI powered by *shadcn/ui + TailwindCSS*
 
 ---
 
@@ -16,64 +26,65 @@ Ziraboard is a complete Kanban-style project management system like **Trello, Ji
 
 ## 👥 Team System
 - Create teams  
-- Invite members (email-based)  
+- Invite users (email required)  
+- Users must **Accept / Reject**  
 - Owner/Admin can:
-  - Promote/demote members (admin ⇄ member)
-  - Remove members  
-  - View pending invites  
-- Members join only via **accept invite**
+  - Promote/Demote users (admin ⇄ member)  
+  - Remove users  
+  - View all invites  
 
 ---
 
 ## 📁 Projects
-- Create personal or team projects  
-- All team members can view team projects  
-- Project displays:
+- Create **personal** or **team** projects  
+- All team members see team projects  
+- Each project shows:
   - Team info  
   - Owner info  
-  - Member list  
+  - All team members  
 
 ---
 
 ## 🗂️ Kanban Board
-- Create columns  
-- Reorder columns  
-- Create tasks  
-- Move tasks between columns  
-- Drag & drop animations  
-- Smart column highlighting  
-- Role-based editing  
+- Add/Edit/Delete columns  
+- Column priority (change color)  
+- Drag to reorder columns  
+- Smooth DnD animations  
+- Auto-highlight column during drag  
 
 ---
 
 ## 📝 Tasks
-Each task contains:
+Includes:
 
 - Title  
 - Description  
-- Priority (low / medium / high)  
+- Priority badge  
 - Due date  
 - Assignee (team members)  
-- Owner (task creator)  
+- Owner  
+- Drag between columns  
+- Live reorder  
 
-Task card UI includes:
+Task card shows:
 
-- Priority badge  
+- Priority  
+- Assignee avatar initials  
+- Due date chip  
 - Description preview  
-- Assigned user info  
-- Gradient + shadows for clarity  
 
 ---
 
 # ⚙️ Tech Stack
 
 ## Frontend
-- React (Vite)  
+- React (Vite)
 - shadcn/ui  
+- TailwindCSS  
 - Axios  
 - React Router  
 - DndKit  
-- Context API for auth  
+- Context API  
 
 ## Backend
 - Laravel 10  
@@ -90,7 +101,6 @@ Task card UI includes:
 src/
  ├─ api/
  │   └─ axios.js
- │
  ├─ components/
  │   ├─ kanban/
  │   │   ├─ Column.jsx
@@ -99,22 +109,18 @@ src/
  │   │   └─ AddColumnDialog.jsx
  │   └─ teams/
  │       └─ InvitesPanel.jsx
- │
  ├─ context/
  │   └─ AuthContext.jsx
- │
  ├─ layout/
  │   └─ ProtectedLayout.jsx
- │
  ├─ pages/
- │   ├─ Login.jsx
- │   ├─ Register.jsx
  │   ├─ HomePage.jsx
  │   ├─ ProjectsPage.jsx
  │   ├─ TeamsPage.jsx
  │   ├─ PendingInvites.jsx
- │   └─ BoardPage.jsx
- │
+ │   ├─ BoardPage.jsx
+ │   ├─ Login.jsx
+ │   └─ Register.jsx
  └─ App.jsx
 ```
 
@@ -130,12 +136,10 @@ app/
  │   ├─ Project.php
  │   ├─ BoardColumn.php
  │   └─ Task.php
- │
  ├─ Policies/
  │   ├─ TeamPolicy.php
  │   ├─ ProjectPolicy.php
  │   └─ TaskPolicy.php
- │
  └─ Http/Controllers/Api/
      ├─ AuthController.php
      ├─ TeamController.php
@@ -147,7 +151,7 @@ app/
 
 ---
 
-# 🔌 API Routes Summary
+# 🔌 API Routes Overview
 
 ## Auth
 ```
@@ -171,7 +175,7 @@ PATCH  /teams/{team}/members/{user}/role
 DELETE /teams/{team}/members/{user}
 ```
 
-## Projects & Board
+## Projects
 ```
 GET  /projects
 POST /projects
@@ -197,24 +201,25 @@ DELETE /tasks/{task}
 
 ---
 
-# 🧭 Layout & Navigation
+# 🧭 Navigation & Layout
 
-### Sidebar sections:
-- Home  
-- Projects  
-- Teams  
-- Invites  
+### Sidebar Menu (Fixed)
+- 🏠 Home  
+- 📋 Projects  
+- 👥 Teams  
+- ✉️ Invites  
+- Logout  
 
-### Breadcrumb Example:
+### Breadcrumbs Example
 ```
-Teams → JSON Team → Just 1st Project → Board
+Teams → JSON Team → First Project → Board
 ```
 
 ---
 
-# 🛠 Setup Instructions
+# 🛠 Installation
 
-## Backend (Laravel)
+## Backend
 ```bash
 composer install
 cp .env.example .env
@@ -223,16 +228,7 @@ php artisan migrate
 php artisan serve
 ```
 
-.env updates:
-```
-SANCTUM_STATEFUL_DOMAINS=localhost:5173
-FRONTEND_URL=http://localhost:5173
-APP_URL=http://127.0.0.1:8000
-```
-
----
-
-## Frontend (React)
+## Frontend
 ```bash
 npm install
 npm run dev
@@ -240,8 +236,6 @@ npm run dev
 
 `src/api/axios.js`:
 ```js
-import axios from "axios";
-
 export default axios.create({
   baseURL: "http://127.0.0.1:8000/api",
   withCredentials: true,
@@ -250,7 +244,7 @@ export default axios.create({
 
 ---
 
-# 📌 Permission Table
+# 🔐 Permissions Overview
 
 | Action | Owner | Admin | Member |
 |--------|--------|--------|--------|
@@ -263,15 +257,23 @@ export default axios.create({
 
 ---
 
-# 🎯 Future Plans
-- Activity log (who moved what)  
-- Comments inside tasks  
-- File uploads  
-- Multiple boards per project  
-- Dark mode  
+# 🌍 Live Demo
+
+### 👉 **https://todo.onexcode.com**
+
+Login/Signup required.
+
+---
+
+# 🎯 Roadmap
+- Activity log (who moved what)
+- Comments inside tasks
+- File uploads
+- Multiple boards per project
+- Dark mode
 
 ---
 
 # 📜 License
-MIT License — free for personal or commercial use.
+MIT — free to use anywhere.
 
